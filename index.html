@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evergreen Market | Premium Grocery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- BACKGROUND EFFECTS -->
+  <div class="noise"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- CART DRAWER OVERLAY -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <!-- CART DRAWER -->
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    <div class="cart-drawer-header">
+      <h3>Your Cart <span class="cart-drawer-count" id="cartDrawerCount">0</span></h3>
+      <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <div class="cart-empty-icon">🛒</div>
+        <p>Your cart is empty</p>
+        <span>Add some fresh picks!</span>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <strong id="cartSubtotal">$0.00</strong>
+      </div>
+      <div class="cart-delivery-note">🚚 Free delivery on orders over $45</div>
+      <button class="btn-primary full-width">Checkout →</button>
+      <button class="btn-ghost full-width" id="clearCartBtn">Clear cart</button>
+    </div>
+  </aside>
+
+  <!-- HEADER -->
+  <header id="header">
+    <nav class="nav container">
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg width="30" height="30" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="13" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M14 6 C10 10, 6 12, 7 18 C9 22, 14 23, 14 23 C14 23, 19 22, 21 18 C22 12, 18 10, 14 6Z" fill="currentColor" opacity="0.9"/>
+            <circle cx="14" cy="10" r="2" fill="var(--bg)"/>
+          </svg>
+        </div>
+        <span>Evergreen<em>Market</em></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#categories">Shop</a></li>
+        <li><a href="#best-sellers">Favourites</a></li>
+        <li><a href="#deals">Deals</a></li>
+        <li><a href="#fresh">Fresh</a></li>
+        <li><a href="#hours">Hours</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Search toggle -->
+        <button class="icon-btn" id="searchToggleBtn" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+
+        <!-- Dark mode toggle -->
+        <button class="icon-btn theme-btn" id="themeBtn" aria-label="Toggle dark mode">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <!-- Cart button -->
+        <button class="cart-btn" id="cartBtn" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/></svg>
+          <span class="cart-count" id="cartCount"></span>
+        </button>
+
+        <button class="cta-pill" onclick="document.getElementById('hours').scrollIntoView({behavior:'smooth'})">Start Shopping</button>
+
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="Menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- SEARCH BAR -->
+    <div class="search-bar-wrap" id="searchBarWrap">
+      <div class="container">
+        <div class="search-bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" placeholder="Search for produce, bakery, dairy…" autocomplete="off" />
+          <button id="searchClearBtn" class="search-clear" aria-label="Clear">✕</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#categories">Shop</a>
+      <a href="#best-sellers">Favourites</a>
+      <a href="#deals">Deals</a>
+      <a href="#fresh">Fresh</a>
+      <a href="#hours">Hours</a>
+    </div>
+  </header>
+
+  <!-- SEARCH RESULTS PANEL -->
+  <div class="search-results-panel" id="searchResultsPanel">
+    <div class="container">
+      <div class="search-results-grid" id="searchResultsGrid"></div>
+      <p class="search-no-results" id="searchNoResults" style="display:none">No results found. Try a different keyword.</p>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text reveal-up">
+        <span class="eyebrow">Premium Groceries · Est. 2009</span>
+        <h1>The market,<br><em>reimagined</em><br>for you.</h1>
+        <p class="hero-sub">Hand-picked produce, artisan goods, and everyday staples — delivered before your morning coffee.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="document.getElementById('best-sellers').scrollIntoView({behavior:'smooth'})">Shop now</button>
+          <button class="btn-ghost" onclick="document.getElementById('deals').scrollIntoView({behavior:'smooth'})">Today's deals →</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span>4.9★</span><small>Rating</small></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span>12k+</span><small>Members</small></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span>1hr</span><small>Delivery</small></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span>500+</span><small>Products</small></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-big">
+          <div class="hero-card-emoji">🥬</div>
+          <div class="hero-card-text">
+            <strong>Organic Harvest</strong>
+            <span>Just arrived this morning</span>
+          </div>
+          <span class="badge-fresh">Fresh</span>
+        </div>
+        <div class="hero-float float-1">
+          <span>🍋</span>
+          <div><strong>Citrus Box</strong><span>Save 30%</span></div>
+        </div>
+        <div class="hero-float float-2">
+          <span>🫐</span>
+          <div><strong>Wild Blueberries</strong><span>★★★★★</span></div>
+        </div>
+        <div class="hero-float float-3">
+          <span>🥐</span>
+          <div><strong>Bakery Fresh</strong><span>Daily bake</span></div>
+        </div>
+        <div class="hero-float float-4">
+          <span>🧀</span>
+          <div><strong>Aged Cheddar</strong><span>Local farm</span></div>
+        </div>
+        <div class="hero-orb"></div>
+      </div>
+    </div>
+    <div class="hero-marquee">
+      <div class="marquee-track">
+        <span>Organic Produce</span><span>·</span>
+        <span>Wild-Caught Seafood</span><span>·</span>
+        <span>Artisan Bakery</span><span>·</span>
+        <span>Free Delivery Over $45</span><span>·</span>
+        <span>Seasonal Boxes</span><span>·</span>
+        <span>Same-Day Pickup</span><span>·</span>
+        <span>Grass-Fed Dairy</span><span>·</span>
+        <span>Small-Batch Coffee</span><span>·</span>
+        <span>Organic Produce</span><span>·</span>
+        <span>Wild-Caught Seafood</span><span>·</span>
+        <span>Artisan Bakery</span><span>·</span>
+        <span>Free Delivery Over $45</span><span>·</span>
+        <span>Seasonal Boxes</span><span>·</span>
+        <span>Same-Day Pickup</span><span>·</span>
+        <span>Grass-Fed Dairy</span><span>·</span>
+        <span>Small-Batch Coffee</span><span>·</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Everything you need</span>
+          <h2>Browse by <em>category</em></h2>
+        </div>
+        <a href="#" class="link-arrow">View all →</a>
+      </div>
+      <div class="categories-grid">
+        <div class="cat-card cat-produce reveal" data-filter="produce">
+          <div class="cat-icon">🥦</div>
+          <h3>Produce</h3>
+          <p>Farm-to-table, certified organic.</p>
+          <span class="cat-count">180+ items</span>
+        </div>
+        <div class="cat-card cat-dairy reveal" style="--d:.08s" data-filter="dairy">
+          <div class="cat-icon">🧀</div>
+          <h3>Dairy & Eggs</h3>
+          <p>Local farms, grass-fed, free-range.</p>
+          <span class="cat-count">60+ items</span>
+        </div>
+        <div class="cat-card cat-meat reveal" style="--d:.16s" data-filter="meat">
+          <div class="cat-icon">🥩</div>
+          <h3>Meat</h3>
+          <p>Humanely raised, pasture-fed.</p>
+          <span class="cat-count">45+ items</span>
+        </div>
+        <div class="cat-card cat-seafood reveal" style="--d:.24s" data-filter="seafood">
+          <div class="cat-icon">🐟</div>
+          <h3>Seafood</h3>
+          <p>Wild-caught and responsibly sourced.</p>
+          <span class="cat-count">30+ items</span>
+        </div>
+        <div class="cat-card cat-bakery reveal" style="--d:.32s" data-filter="bakery">
+          <div class="cat-icon">🍞</div>
+          <h3>Bakery</h3>
+          <p>Fresh loaves baked every morning.</p>
+          <span class="cat-count">25+ items</span>
+        </div>
+        <div class="cat-card cat-pantry reveal" style="--d:.40s" data-filter="pantry">
+          <div class="cat-icon">🫙</div>
+          <h3>Pantry</h3>
+          <p>Staples, sauces, and specialty goods.</p>
+          <span class="cat-count">200+ items</span>
+        </div>
+        <div class="cat-card cat-beverages reveal" style="--d:.48s" data-filter="beverages">
+          <div class="cat-icon">☕</div>
+          <h3>Beverages</h3>
+          <p>Coffee, teas, juices & more.</p>
+          <span class="cat-count">80+ items</span>
+        </div>
+        <div class="cat-card cat-snacks reveal" style="--d:.56s" data-filter="snacks">
+          <div class="cat-icon">🍫</div>
+          <h3>Snacks</h3>
+          <p>Wholesome treats & indulgences.</p>
+          <span class="cat-count">90+ items</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEST SELLERS -->
+  <section id="best-sellers" class="section section-dark">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow light">Member favorites</span>
+          <h2>Best <em>Sellers</em></h2>
+        </div>
+        <a href="#" class="link-arrow light">View all →</a>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="produce">Produce</button>
+        <button class="filter-btn" data-filter="dairy">Dairy</button>
+        <button class="filter-btn" data-filter="meat">Meat</button>
+        <button class="filter-btn" data-filter="seafood">Seafood</button>
+        <button class="filter-btn" data-filter="bakery">Bakery</button>
+        <button class="filter-btn" data-filter="pantry">Pantry</button>
+        <button class="filter-btn" data-filter="beverages">Beverages</button>
+        <button class="filter-btn" data-filter="snacks">Snacks</button>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+
+        <div class="product-card reveal" data-name="Emerald Spinach" data-price="3.20" data-category="produce">
+          <div class="product-img">🌿</div>
+          <div class="product-info">
+            <div class="product-tag">Organic</div>
+            <h3>Emerald Spinach</h3>
+            <p>6 oz · organic bunch</p>
+            <div class="product-footer">
+              <span class="price">$3.20</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.08s" data-name="Heirloom Tomatoes" data-price="5.50" data-category="produce">
+          <div class="product-img">🍅</div>
+          <div class="product-info">
+            <div class="product-tag">Seasonal</div>
+            <h3>Heirloom Tomatoes</h3>
+            <p>1 lb · mixed colours</p>
+            <div class="product-footer">
+              <span class="price">$5.50</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.16s" data-name="Grove Avocados" data-price="6.80" data-category="produce">
+          <div class="product-img">🥑</div>
+          <div class="product-info">
+            <div class="product-tag">Organic</div>
+            <h3>Grove Avocados</h3>
+            <p>Pack of 4 · ripe &amp; ready</p>
+            <div class="product-footer">
+              <span class="price">$6.80</span>
+              <div class="stars">★★★★☆</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.24s" data-name="Farmhouse Eggs" data-price="7.40" data-category="dairy">
+          <div class="product-img">🥚</div>
+          <div class="product-info">
+            <div class="product-tag">Free-range</div>
+            <h3>Farmhouse Eggs</h3>
+            <p>12 · pasture-raised</p>
+            <div class="product-footer">
+              <span class="price">$7.40</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.32s" data-name="Aged Cheddar" data-price="8.90" data-category="dairy">
+          <div class="product-img">🧀</div>
+          <div class="product-info">
+            <div class="product-tag">Local</div>
+            <h3>Aged Cheddar</h3>
+            <p>8 oz · 18-month aged</p>
+            <div class="product-footer">
+              <span class="price">$8.90</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.40s" data-name="Grass-Fed Butter" data-price="5.20" data-category="dairy">
+          <div class="product-img">🧈</div>
+          <div class="product-info">
+            <div class="product-tag">Grass-fed</div>
+            <h3>Grass-Fed Butter</h3>
+            <p>8 oz · European style</p>
+            <div class="product-footer">
+              <span class="price">$5.20</span>
+              <div class="stars">★★★★☆</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.08s" data-name="Atlantic Salmon" data-price="14.50" data-category="seafood">
+          <div class="product-img">🐟</div>
+          <div class="product-info">
+            <div class="product-tag">Wild-caught</div>
+            <h3>Atlantic Salmon</h3>
+            <p>6 oz fillet · fresh</p>
+            <div class="product-footer">
+              <span class="price">$14.50</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.16s" data-name="Sourdough Loaf" data-price="6.00" data-category="bakery">
+          <div class="product-img">🍞</div>
+          <div class="product-info">
+            <div class="product-tag">Daily Bake</div>
+            <h3>Sourdough Loaf</h3>
+            <p>900g · long fermentation</p>
+            <div class="product-footer">
+              <span class="price">$6.00</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.24s" data-name="Sirloin Steak" data-price="18.00" data-category="meat">
+          <div class="product-img">🥩</div>
+          <div class="product-info">
+            <div class="product-tag">Pasture-fed</div>
+            <h3>Sirloin Steak</h3>
+            <p>8 oz · dry-aged 21 days</p>
+            <div class="product-footer">
+              <span class="price">$18.00</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.32s" data-name="Truffle Honey" data-price="12.00" data-category="pantry">
+          <div class="product-img">🍯</div>
+          <div class="product-info">
+            <div class="product-tag">Artisan</div>
+            <h3>Truffle Honey</h3>
+            <p>8 oz · black truffle</p>
+            <div class="product-footer">
+              <span class="price">$12.00</span>
+              <div class="stars">★★★★☆</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.40s" data-name="Cold Brew Coffee" data-price="5.40" data-category="beverages">
+          <div class="product-img">☕</div>
+          <div class="product-info">
+            <div class="product-tag">Small-batch</div>
+            <h3>Cold Brew Coffee</h3>
+            <p>12 oz · single origin</p>
+            <div class="product-footer">
+              <span class="price">$5.40</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.48s" data-name="Dark Chocolate Bar" data-price="4.50" data-category="snacks">
+          <div class="product-img">🍫</div>
+          <div class="product-info">
+            <div class="product-tag">72% Cacao</div>
+            <h3>Dark Chocolate Bar</h3>
+            <p>3.5 oz · single origin</p>
+            <div class="product-footer">
+              <span class="price">$4.50</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DEALS -->
+  <section id="deals" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Limited time</span>
+          <h2>Today's <em>Deals</em></h2>
+        </div>
+        <div class="countdown-wrap">
+          <span class="eyebrow">Ends in</span>
+          <span class="countdown" id="countdown">--:--:--</span>
+        </div>
+      </div>
+      <div class="deals-grid">
+        <div class="deal-card reveal">
+          <div class="deal-badge">Save 30%</div>
+          <div class="deal-emoji">🍊</div>
+          <h3>Market Citrus Box</h3>
+          <p>Three varietals, hand-selected and packed before sunrise.</p>
+          <div class="deal-price"><span class="old">$28.00</span><span class="new">$19.60</span></div>
+          <button class="btn-primary deal-claim-btn">Claim Deal</button>
+        </div>
+        <div class="deal-card reveal" style="--d:.12s">
+          <div class="deal-badge">2 for 1</div>
+          <div class="deal-emoji">🥖</div>
+          <h3>Artisan Bread Duo</h3>
+          <p>Warm sourdough and rosemary focaccia, baked daily.</p>
+          <div class="deal-price"><span class="old">$16.00</span><span class="new">$8.00</span></div>
+          <button class="btn-primary deal-claim-btn">Claim Deal</button>
+        </div>
+        <div class="deal-card reveal" style="--d:.24s">
+          <div class="deal-badge">Save 25%</div>
+          <div class="deal-emoji">🦞</div>
+          <h3>Seafood Supper Kit</h3>
+          <p>Salmon, citrus butter, and herb salad kit for two.</p>
+          <div class="deal-price"><span class="old">$36.00</span><span class="new">$27.00</span></div>
+          <button class="btn-primary deal-claim-btn">Claim Deal</button>
+        </div>
+        <div class="deal-card reveal" style="--d:.36s">
+          <div class="deal-badge">Save 20%</div>
+          <div class="deal-emoji">🫙</div>
+          <h3>Pantry Staples Box</h3>
+          <p>Olive oil, pasta, tinned tomatoes & sea salt, curated.</p>
+          <div class="deal-price"><span class="old">$42.00</span><span class="new">$33.60</span></div>
+          <button class="btn-primary deal-claim-btn">Claim Deal</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRESH ARRIVALS -->
+  <section id="fresh" class="section section-accent">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Just stocked</span>
+          <h2>Fresh <em>Arrivals</em></h2>
+        </div>
+        <a href="#" class="link-arrow">View all →</a>
+      </div>
+      <div class="fresh-grid">
+        <div class="product-card fresh reveal" data-name="Midnight Cold Brew" data-price="5.40" data-category="beverages">
+          <div class="product-img">☕</div>
+          <div class="product-info">
+            <div class="product-tag new-tag">New</div>
+            <h3>Midnight Cold Brew</h3>
+            <p>12 oz · small batch</p>
+            <div class="product-footer">
+              <span class="price">$5.40</span>
+              <div class="stars">★★★★☆</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card fresh reveal" style="--d:.1s" data-name="Alpine Yogurt" data-price="4.10" data-category="dairy">
+          <div class="product-img">🫙</div>
+          <div class="product-info">
+            <div class="product-tag new-tag">New</div>
+            <h3>Alpine Yogurt</h3>
+            <p>16 oz · vanilla bean</p>
+            <div class="product-footer">
+              <span class="price">$4.10</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card fresh reveal" style="--d:.2s" data-name="Harvest Carrots" data-price="3.00" data-category="produce">
+          <div class="product-img">🥕</div>
+          <div class="product-info">
+            <div class="product-tag new-tag">New</div>
+            <h3>Harvest Carrots</h3>
+            <p>1 lb · heirloom mix</p>
+            <div class="product-footer">
+              <span class="price">$3.00</span>
+              <div class="stars">★★★★☆</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card fresh reveal" style="--d:.3s" data-name="Matcha Green Tea" data-price="9.80" data-category="beverages">
+          <div class="product-img">🍵</div>
+          <div class="product-info">
+            <div class="product-tag new-tag">New</div>
+            <h3>Matcha Green Tea</h3>
+            <p>30g · ceremonial grade</p>
+            <div class="product-footer">
+              <span class="price">$9.80</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card fresh reveal" style="--d:.4s" data-name="Sourdough Crackers" data-price="4.60" data-category="snacks">
+          <div class="product-img">🫓</div>
+          <div class="product-info">
+            <div class="product-tag new-tag">New</div>
+            <h3>Sourdough Crackers</h3>
+            <p>5 oz · rosemary &amp; sea salt</p>
+            <div class="product-footer">
+              <span class="price">$4.60</span>
+              <div class="stars">★★★★☆</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card fresh reveal" style="--d:.5s" data-name="Wild Mushroom Mix" data-price="7.20" data-category="produce">
+          <div class="product-img">🍄</div>
+          <div class="product-info">
+            <div class="product-tag new-tag">New</div>
+            <h3>Wild Mushroom Mix</h3>
+            <p>8 oz · foraged blend</p>
+            <div class="product-footer">
+              <span class="price">$7.20</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section section-dark">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="eyebrow light">Trusted by locals</span>
+        <h2>What our <em>members</em> say</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial reveal">
+          <div class="stars">★★★★★</div>
+          <blockquote>"The freshness is unmatched. My weekly box feels like a curated market run without leaving home."</blockquote>
+          <div class="testimonial-author">
+            <div class="avatar">A</div>
+            <div><strong>Avery K.</strong><span>Member since 2021</span></div>
+          </div>
+        </div>
+        <div class="testimonial reveal" style="--d:.15s">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Packaging is beautiful, delivery is fast, and the produce lasts longer than any other service."</blockquote>
+          <div class="testimonial-author">
+            <div class="avatar">J</div>
+            <div><strong>Jordan S.</strong><span>Member since 2022</span></div>
+          </div>
+        </div>
+        <div class="testimonial reveal" style="--d:.3s">
+          <div class="stars">★★★★★</div>
+          <blockquote>"Finally a grocery service that actually cares about where food comes from. Truly exceptional quality."</blockquote>
+          <div class="testimonial-author">
+            <div class="avatar">M</div>
+            <div><strong>Maya R.</strong><span>Member since 2020</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOURS + CTA -->
+  <section id="hours" class="section">
+    <div class="container hours-container">
+      <div class="hours-card reveal">
+        <span class="eyebrow">Open daily</span>
+        <h2>Store <em>Hours</em></h2>
+        <div class="hours-list">
+          <div class="hours-row"><span>Mon – Fri</span><span>7:00 AM – 9:00 PM</span></div>
+          <div class="hours-row"><span>Saturday</span><span>8:00 AM – 8:00 PM</span></div>
+          <div class="hours-row"><span>Sunday</span><span>8:00 AM – 7:00 PM</span></div>
+        </div>
+        <p class="hours-note">🚚 Pickup &amp; delivery available every day</p>
+      </div>
+      <div class="cta-card reveal" style="--d:.2s">
+        <div class="cta-badge">Evergreen<strong>+</strong></div>
+        <h3>Delivery, designed around your schedule.</h3>
+        <p>Join Evergreen+ for free delivery on orders over $45 and early access to seasonal boxes.</p>
+        <ul class="cta-perks">
+          <li>✓ Free delivery on $45+</li>
+          <li>✓ Early seasonal box access</li>
+          <li>✓ Members-only deals</li>
+          <li>✓ Cancel anytime</li>
+        </ul>
+        <button class="btn-primary">Start Delivery</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter" class="section newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner reveal">
+        <div class="newsletter-text">
+          <span class="eyebrow">Stay in the loop</span>
+          <h2>Fresh news, <em>weekly</em></h2>
+          <p>Get seasonal recipes, member deals, and first dibs on new arrivals — straight to your inbox. No spam, ever.</p>
+          <ul class="newsletter-perks">
+            <li>🌿 Weekly seasonal recipes</li>
+            <li>🏷️ Exclusive member deals</li>
+            <li>📦 New arrival alerts</li>
+          </ul>
+        </div>
+        <div class="newsletter-form-wrap">
+          <div class="newsletter-form" id="newsletterForm">
+            <input type="text" class="nl-input" id="nlName" placeholder="Your first name" autocomplete="given-name"/>
+            <input type="email" class="nl-input" id="nlEmail" placeholder="Your email address" autocomplete="email"/>
+            <button class="btn-primary" id="nlSubmitBtn">Subscribe →</button>
+          </div>
+          <p class="nl-disclaimer">By subscribing you agree to our privacy policy. Unsubscribe at any time.</p>
+          <div class="nl-success" id="nlSuccess" style="display:none">
+            <div class="nl-success-icon">🎉</div>
+            <strong>You're in!</strong>
+            <p>Welcome to the Evergreen community. Check your inbox for a welcome treat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-mark small">
+            <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+              <circle cx="14" cy="14" r="13" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M14 6 C10 10, 6 12, 7 18 C9 22, 14 23, 14 23 C14 23, 19 22, 21 18 C22 12, 18 10, 14 6Z" fill="currentColor" opacity="0.9"/>
+            </svg>
+          </div>
+          <span>Evergreen<em>Market</em></span>
+        </div>
+        <p>Premium groceries for modern routines.<br>Fresh, fast, and always curated.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram" class="social-btn">📸</a>
+          <a href="#" aria-label="Twitter" class="social-btn">𝕏</a>
+          <a href="#" aria-label="Facebook" class="social-btn">📘</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Explore</h4>
+          <a href="#categories">Categories</a>
+          <a href="#best-sellers">Best Sellers</a>
+          <a href="#deals">Today's Deals</a>
+          <a href="#fresh">Fresh Arrivals</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="#hours">Store Hours</a>
+          <a href="#testimonials">Member Stories</a>
+          <a href="#newsletter">Newsletter</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Accessibility</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Evergreen Market. All rights reserved.</span>
+      <span>Made with 🌿 for fresh food lovers.</span>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✓</span>
+    <span id="toastMsg">Added to cart</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
