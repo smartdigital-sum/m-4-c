@@ -50,9 +50,43 @@ function changeQty(name, delta) {
   else renderCart();
 }
 
+/* ================================================================
+   PROMO CODE SYSTEM
+   ================================================================ */
+const PROMO_CODES = {
+  'FRESH10':  { pct: 10, label: '10% off applied!' },
+  'SPICE20':  { pct: 20, label: '20% off applied!' },
+  'GRAIN15':  { pct: 15, label: '15% off applied!' },
+};
+let activePromo = null;
+
+const promoInputEl  = document.getElementById('promoInput');
+const promoApplyBtn = document.getElementById('promoApplyBtn');
+const promoMsgEl    = document.getElementById('promoMsg');
+const discountLine  = document.getElementById('discountLine');
+const discountVal   = document.getElementById('discountVal');
+
+if (promoApplyBtn) {
+  promoApplyBtn.addEventListener('click', () => {
+    const code = promoInputEl.value.trim().toUpperCase();
+    if (PROMO_CODES[code]) {
+      activePromo = PROMO_CODES[code];
+      promoMsgEl.textContent = '✓ ' + activePromo.label;
+      promoMsgEl.className = 'promo-msg success';
+    } else {
+      activePromo = null;
+      promoMsgEl.textContent = '✗ Invalid promo code. Try FRESH10';
+      promoMsgEl.className = 'promo-msg error';
+    }
+    renderCart();
+  });
+}
+
 /* Render cart drawer */
 function renderCart() {
-  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const discount = activePromo ? Math.round(subtotal * activePromo.pct / 100) : 0;
+  const total = subtotal - discount;
   const totalQty = cart.reduce((s, i) => s + i.qty, 0);
 
   // Badge
@@ -90,19 +124,25 @@ function renderCart() {
       <div class="cart-item-emoji">${item.emoji}</div>
       <div class="cart-item-details">
         <h4>${item.name}</h4>
-        <span>$${item.price.toFixed(2)} each</span>
+        <span>₹${item.price.toFixed(0)} each</span>
       </div>
       <div class="cart-item-controls">
         <button class="qty-btn" data-action="dec" data-name="${item.name}">−</button>
         <span class="qty-val">${item.qty}</span>
         <button class="qty-btn" data-action="inc" data-name="${item.name}">+</button>
       </div>
-      <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+      <div class="cart-item-price">₹${(item.price * item.qty).toFixed(0)}</div>
     `;
     cartItemsEl.appendChild(el);
   });
 
-  cartSubtotalEl.textContent = `$${total.toFixed(2)}`;
+  cartSubtotalEl.textContent = `₹${subtotal.toFixed(0)}`;
+  if (discount > 0 && discountLine && discountVal) {
+    discountLine.style.display = 'flex';
+    discountVal.textContent = `−₹${discount}`;
+  } else if (discountLine) {
+    discountLine.style.display = 'none';
+  }
 }
 
 /* Qty button delegation */
@@ -176,7 +216,7 @@ document.querySelectorAll('.deal-claim-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const card = btn.closest('.deal-card');
     const name = card.querySelector('h3').textContent;
-    const priceText = card.querySelector('.new').textContent.replace('$', '');
+    const priceText = card.querySelector('.new').textContent.replace('₹', '').replace(',', '');
     const emoji = getEmoji(card);
 
     addToCart(name, priceText, emoji);
@@ -503,6 +543,21 @@ shakeStyle.textContent = `
   }
 `;
 document.head.appendChild(shakeStyle);
+
+/* ================================================================
+   ORDER TRACKING
+   ================================================================ */
+const trackBtn = document.getElementById('trackBtn');
+const trackResult = document.getElementById('trackResult');
+if (trackBtn) {
+  trackBtn.addEventListener('click', () => {
+    const id = document.getElementById('trackInput').value.trim();
+    if (id) {
+      trackResult.style.display = 'block';
+      trackResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+}
 
 /* ================================================================
    INITIAL CART RENDER

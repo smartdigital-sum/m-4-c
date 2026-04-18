@@ -33,12 +33,21 @@
       </div>
     </div>
     <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="promo-input-row">
+        <input type="text" id="promoInput" class="promo-field" placeholder="Promo code (e.g. FRESH10)" />
+        <button id="promoApplyBtn" class="promo-apply-btn">Apply</button>
+      </div>
+      <p class="promo-msg" id="promoMsg"></p>
       <div class="cart-subtotal">
         <span>Subtotal</span>
-        <strong id="cartSubtotal">$0.00</strong>
+        <strong id="cartSubtotal">₹0</strong>
       </div>
-      <div class="cart-delivery-note">🚚 Free delivery on orders over $45</div>
-      <button class="btn-primary full-width">Checkout →</button>
+      <div class="discount-line" id="discountLine" style="display:none">
+        <span>Discount</span>
+        <strong class="discount-val" id="discountVal">−₹0</strong>
+      </div>
+      <div class="cart-delivery-note">🚚 Free delivery on orders above ₹399</div>
+      <button class="btn-primary full-width">Proceed to Checkout →</button>
       <button class="btn-ghost full-width" id="clearCartBtn">Clear cart</button>
     </div>
   </aside>
@@ -171,22 +180,22 @@
     </div>
     <div class="hero-marquee">
       <div class="marquee-track">
-        <span>Organic Produce</span><span>·</span>
-        <span>Wild-Caught Seafood</span><span>·</span>
-        <span>Artisan Bakery</span><span>·</span>
-        <span>Free Delivery Over $45</span><span>·</span>
-        <span>Seasonal Boxes</span><span>·</span>
-        <span>Same-Day Pickup</span><span>·</span>
-        <span>Grass-Fed Dairy</span><span>·</span>
-        <span>Small-Batch Coffee</span><span>·</span>
-        <span>Organic Produce</span><span>·</span>
-        <span>Wild-Caught Seafood</span><span>·</span>
-        <span>Artisan Bakery</span><span>·</span>
-        <span>Free Delivery Over $45</span><span>·</span>
-        <span>Seasonal Boxes</span><span>·</span>
-        <span>Same-Day Pickup</span><span>·</span>
-        <span>Grass-Fed Dairy</span><span>·</span>
-        <span>Small-Batch Coffee</span><span>·</span>
+        <span>🥬 Farm Fresh Sabzi</span><span>·</span>
+        <span>🫘 Premium Dal & Pulses</span><span>·</span>
+        <span>🌾 Organic Atta & Rice</span><span>·</span>
+        <span>🚚 Free Delivery Over ₹399</span><span>·</span>
+        <span>🌶️ Authentic Masalas</span><span>·</span>
+        <span>🥛 Amul Dairy Products</span><span>·</span>
+        <span>🍵 Premium Assam Tea</span><span>·</span>
+        <span>🫙 Homemade Pickles</span><span>·</span>
+        <span>🥬 Farm Fresh Sabzi</span><span>·</span>
+        <span>🫘 Premium Dal & Pulses</span><span>·</span>
+        <span>🌾 Organic Atta & Rice</span><span>·</span>
+        <span>🚚 Free Delivery Over ₹399</span><span>·</span>
+        <span>🌶️ Authentic Masalas</span><span>·</span>
+        <span>🥛 Amul Dairy Products</span><span>·</span>
+        <span>🍵 Premium Assam Tea</span><span>·</span>
+        <span>🫙 Homemade Pickles</span><span>·</span>
       </div>
     </div>
   </section>
@@ -280,168 +289,180 @@
 
       <div class="products-grid" id="productsGrid">
 
-        <div class="product-card reveal" data-name="Emerald Spinach" data-price="3.20" data-category="produce">
+        <div class="product-card reveal" data-name="Palak Saag" data-price="25" data-category="produce">
           <div class="product-img">🌿</div>
           <div class="product-info">
             <div class="product-tag">Organic</div>
-            <h3>Emerald Spinach</h3>
-            <p>6 oz · organic bunch</p>
+            <h3>Palak Saag</h3>
+            <p>250g · farm fresh bunch</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$3.20</span>
+              <span class="price">₹25</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card reveal" style="--d:.08s" data-name="Heirloom Tomatoes" data-price="5.50" data-category="produce">
+        <div class="product-card reveal" style="--d:.08s" data-name="Deshi Tamatar" data-price="40" data-category="produce">
           <div class="product-img">🍅</div>
           <div class="product-info">
-            <div class="product-tag">Seasonal</div>
-            <h3>Heirloom Tomatoes</h3>
-            <p>1 lb · mixed colours</p>
+            <div class="product-tag">Fresh</div>
+            <h3>Deshi Tamatar</h3>
+            <p>500g · local farm tomatoes</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$5.50</span>
+              <span class="price">₹40</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card reveal" style="--d:.16s" data-name="Grove Avocados" data-price="6.80" data-category="produce">
-          <div class="product-img">🥑</div>
-          <div class="product-info">
-            <div class="product-tag">Organic</div>
-            <h3>Grove Avocados</h3>
-            <p>Pack of 4 · ripe &amp; ready</p>
-            <div class="product-footer">
-              <span class="price">$6.80</span>
-              <div class="stars">★★★★☆</div>
-              <button class="add-btn" data-add aria-label="Add to cart">+</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card reveal" style="--d:.24s" data-name="Farmhouse Eggs" data-price="7.40" data-category="dairy">
-          <div class="product-img">🥚</div>
-          <div class="product-info">
-            <div class="product-tag">Free-range</div>
-            <h3>Farmhouse Eggs</h3>
-            <p>12 · pasture-raised</p>
-            <div class="product-footer">
-              <span class="price">$7.40</span>
-              <div class="stars">★★★★★</div>
-              <button class="add-btn" data-add aria-label="Add to cart">+</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card reveal" style="--d:.32s" data-name="Aged Cheddar" data-price="8.90" data-category="dairy">
+        <div class="product-card reveal" style="--d:.16s" data-name="Amul Paneer" data-price="85" data-category="dairy">
           <div class="product-img">🧀</div>
           <div class="product-info">
-            <div class="product-tag">Local</div>
-            <h3>Aged Cheddar</h3>
-            <p>8 oz · 18-month aged</p>
+            <div class="product-tag">Best Seller</div>
+            <h3>Amul Paneer</h3>
+            <p>200g · soft &amp; fresh</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$8.90</span>
+              <span class="price">₹85</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card reveal" style="--d:.40s" data-name="Grass-Fed Butter" data-price="5.20" data-category="dairy">
+        <div class="product-card reveal" style="--d:.24s" data-name="Farm Eggs" data-price="75" data-category="dairy">
+          <div class="product-img">🥚</div>
+          <div class="product-info">
+            <div class="product-tag">Daily Fresh</div>
+            <h3>Farm Eggs</h3>
+            <p>6 · country eggs</p>
+            <div class="stock-status in-stock">● In Stock</div>
+            <div class="product-footer">
+              <span class="price">₹75</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.32s" data-name="Amul Ghee" data-price="290" data-category="dairy">
           <div class="product-img">🧈</div>
           <div class="product-info">
-            <div class="product-tag">Grass-fed</div>
-            <h3>Grass-Fed Butter</h3>
-            <p>8 oz · European style</p>
+            <div class="product-tag">Premium</div>
+            <h3>Amul Ghee</h3>
+            <p>500ml · pure cow ghee</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$5.20</span>
+              <span class="price">₹290</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card reveal" style="--d:.40s" data-name="Chakki Atta" data-price="65" data-category="pantry">
+          <div class="product-img">🌾</div>
+          <div class="product-info">
+            <div class="product-tag">Staple</div>
+            <h3>Chakki Atta</h3>
+            <p>1kg · stone-ground whole wheat</p>
+            <div class="stock-status in-stock">● In Stock</div>
+            <div class="product-footer">
+              <span class="price">₹65</span>
               <div class="stars">★★★★☆</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card reveal" style="--d:.08s" data-name="Atlantic Salmon" data-price="14.50" data-category="seafood">
+        <div class="product-card reveal" style="--d:.08s" data-name="Rohu Maach" data-price="120" data-category="seafood">
           <div class="product-img">🐟</div>
           <div class="product-info">
-            <div class="product-tag">Wild-caught</div>
-            <h3>Atlantic Salmon</h3>
-            <p>6 oz fillet · fresh</p>
+            <div class="product-tag">Fresh Catch</div>
+            <h3>Rohu Maach</h3>
+            <p>500g · fresh water fish</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$14.50</span>
+              <span class="price">₹120</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card reveal" style="--d:.16s" data-name="Sourdough Loaf" data-price="6.00" data-category="bakery">
-          <div class="product-img">🍞</div>
+        <div class="product-card reveal" style="--d:.16s" data-name="Whole Wheat Roti" data-price="30" data-category="bakery">
+          <div class="product-img">🫓</div>
           <div class="product-info">
             <div class="product-tag">Daily Bake</div>
-            <h3>Sourdough Loaf</h3>
-            <p>900g · long fermentation</p>
+            <h3>Whole Wheat Roti</h3>
+            <p>10 pcs · freshly baked</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$6.00</span>
+              <span class="price">₹30</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card reveal" style="--d:.24s" data-name="Sirloin Steak" data-price="18.00" data-category="meat">
-          <div class="product-img">🥩</div>
+        <div class="product-card reveal" style="--d:.24s" data-name="Masoor Dal" data-price="90" data-category="pantry">
+          <div class="product-img">🫘</div>
           <div class="product-info">
-            <div class="product-tag">Pasture-fed</div>
-            <h3>Sirloin Steak</h3>
-            <p>8 oz · dry-aged 21 days</p>
+            <div class="product-tag">Best Seller</div>
+            <h3>Masoor Dal</h3>
+            <p>1kg · whole red lentils</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$18.00</span>
+              <span class="price">₹90</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card reveal" style="--d:.32s" data-name="Truffle Honey" data-price="12.00" data-category="pantry">
-          <div class="product-img">🍯</div>
+        <div class="product-card reveal" style="--d:.32s" data-name="MDH Garam Masala" data-price="55" data-category="pantry">
+          <div class="product-img">🌶️</div>
           <div class="product-info">
-            <div class="product-tag">Artisan</div>
-            <h3>Truffle Honey</h3>
-            <p>8 oz · black truffle</p>
+            <div class="product-tag">Sale</div>
+            <h3>MDH Garam Masala</h3>
+            <p>100g · whole spice blend</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$12.00</span>
+              <span class="price">₹55</span>
               <div class="stars">★★★★☆</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card reveal" style="--d:.40s" data-name="Cold Brew Coffee" data-price="5.40" data-category="beverages">
-          <div class="product-img">☕</div>
+        <div class="product-card reveal" style="--d:.40s" data-name="Tata Tea Gold" data-price="65" data-category="beverages">
+          <div class="product-img">🍵</div>
           <div class="product-info">
-            <div class="product-tag">Small-batch</div>
-            <h3>Cold Brew Coffee</h3>
-            <p>12 oz · single origin</p>
+            <div class="product-tag">Assam Tea</div>
+            <h3>Tata Tea Gold</h3>
+            <p>250g · premium Assam blend</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$5.40</span>
+              <span class="price">₹65</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
 
-        <div class="product-card reveal" style="--d:.48s" data-name="Dark Chocolate Bar" data-price="4.50" data-category="snacks">
-          <div class="product-img">🍫</div>
+        <div class="product-card reveal" style="--d:.48s" data-name="Bikaneri Bhujia" data-price="80" data-category="snacks">
+          <div class="product-img">🍿</div>
           <div class="product-info">
-            <div class="product-tag">72% Cacao</div>
-            <h3>Dark Chocolate Bar</h3>
-            <p>3.5 oz · single origin</p>
+            <div class="product-tag">Popular</div>
+            <h3>Bikaneri Bhujia</h3>
+            <p>200g · classic namkeen</p>
+            <div class="stock-status low-stock">● Low Stock</div>
             <div class="product-footer">
-              <span class="price">$4.50</span>
+              <span class="price">₹80</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
@@ -468,34 +489,34 @@
       <div class="deals-grid">
         <div class="deal-card reveal">
           <div class="deal-badge">Save 30%</div>
-          <div class="deal-emoji">🍊</div>
-          <h3>Market Citrus Box</h3>
-          <p>Three varietals, hand-selected and packed before sunrise.</p>
-          <div class="deal-price"><span class="old">$28.00</span><span class="new">$19.60</span></div>
+          <div class="deal-emoji">🌶️</div>
+          <h3>Grand Masala Box</h3>
+          <p>10 essential spices — turmeric, jeera, dhaniya, garam masala & more. All hand-ground.</p>
+          <div class="deal-price"><span class="old">₹480</span><span class="new">₹336</span></div>
           <button class="btn-primary deal-claim-btn">Claim Deal</button>
         </div>
         <div class="deal-card reveal" style="--d:.12s">
           <div class="deal-badge">2 for 1</div>
-          <div class="deal-emoji">🥖</div>
-          <h3>Artisan Bread Duo</h3>
-          <p>Warm sourdough and rosemary focaccia, baked daily.</p>
-          <div class="deal-price"><span class="old">$16.00</span><span class="new">$8.00</span></div>
+          <div class="deal-emoji">🫘</div>
+          <h3>Dal Combo Pack</h3>
+          <p>Masoor + Moong + Toor Dal — 1kg each. Buy 2 get 1 free. Freshly packed.</p>
+          <div class="deal-price"><span class="old">₹270</span><span class="new">₹180</span></div>
           <button class="btn-primary deal-claim-btn">Claim Deal</button>
         </div>
         <div class="deal-card reveal" style="--d:.24s">
           <div class="deal-badge">Save 25%</div>
-          <div class="deal-emoji">🦞</div>
-          <h3>Seafood Supper Kit</h3>
-          <p>Salmon, citrus butter, and herb salad kit for two.</p>
-          <div class="deal-price"><span class="old">$36.00</span><span class="new">$27.00</span></div>
+          <div class="deal-emoji">🥬</div>
+          <h3>Weekly Sabzi Box</h3>
+          <p>5 seasonal vegetables sourced every morning from local Assam farms. Approx. 4kg.</p>
+          <div class="deal-price"><span class="old">₹350</span><span class="new">₹263</span></div>
           <button class="btn-primary deal-claim-btn">Claim Deal</button>
         </div>
         <div class="deal-card reveal" style="--d:.36s">
           <div class="deal-badge">Save 20%</div>
-          <div class="deal-emoji">🫙</div>
-          <h3>Pantry Staples Box</h3>
-          <p>Olive oil, pasta, tinned tomatoes & sea salt, curated.</p>
-          <div class="deal-price"><span class="old">$42.00</span><span class="new">$33.60</span></div>
+          <div class="deal-emoji">🌾</div>
+          <h3>Atta + Rice Bundle</h3>
+          <p>5kg Chakki Atta + 5kg Basmati Rice — best value family combo pack.</p>
+          <div class="deal-price"><span class="old">₹620</span><span class="new">₹496</span></div>
           <button class="btn-primary deal-claim-btn">Claim Deal</button>
         </div>
       </div>
@@ -513,79 +534,85 @@
         <a href="#" class="link-arrow">View all →</a>
       </div>
       <div class="fresh-grid">
-        <div class="product-card fresh reveal" data-name="Midnight Cold Brew" data-price="5.40" data-category="beverages">
-          <div class="product-img">☕</div>
+        <div class="product-card fresh reveal" data-name="Amul Dahi" data-price="45" data-category="dairy">
+          <div class="product-img">🥛</div>
           <div class="product-info">
             <div class="product-tag new-tag">New</div>
-            <h3>Midnight Cold Brew</h3>
-            <p>12 oz · small batch</p>
+            <h3>Amul Dahi</h3>
+            <p>400g · thick &amp; creamy curd</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$5.40</span>
-              <div class="stars">★★★★☆</div>
-              <button class="add-btn" data-add aria-label="Add to cart">+</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card fresh reveal" style="--d:.1s" data-name="Alpine Yogurt" data-price="4.10" data-category="dairy">
-          <div class="product-img">🫙</div>
-          <div class="product-info">
-            <div class="product-tag new-tag">New</div>
-            <h3>Alpine Yogurt</h3>
-            <p>16 oz · vanilla bean</p>
-            <div class="product-footer">
-              <span class="price">$4.10</span>
+              <span class="price">₹45</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
-        <div class="product-card fresh reveal" style="--d:.2s" data-name="Harvest Carrots" data-price="3.00" data-category="produce">
+        <div class="product-card fresh reveal" style="--d:.1s" data-name="Mother Dairy Milk" data-price="28" data-category="dairy">
+          <div class="product-img">🍶</div>
+          <div class="product-info">
+            <div class="product-tag new-tag">New</div>
+            <h3>Mother Dairy Milk</h3>
+            <p>500ml · full cream toned</p>
+            <div class="stock-status in-stock">● In Stock</div>
+            <div class="product-footer">
+              <span class="price">₹28</span>
+              <div class="stars">★★★★★</div>
+              <button class="add-btn" data-add aria-label="Add to cart">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card fresh reveal" style="--d:.2s" data-name="Deshi Gajar" data-price="30" data-category="produce">
           <div class="product-img">🥕</div>
           <div class="product-info">
             <div class="product-tag new-tag">New</div>
-            <h3>Harvest Carrots</h3>
-            <p>1 lb · heirloom mix</p>
+            <h3>Deshi Gajar</h3>
+            <p>500g · sweet farm carrots</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$3.00</span>
+              <span class="price">₹30</span>
               <div class="stars">★★★★☆</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
-        <div class="product-card fresh reveal" style="--d:.3s" data-name="Matcha Green Tea" data-price="9.80" data-category="beverages">
+        <div class="product-card fresh reveal" style="--d:.3s" data-name="Tata Tea Gold" data-price="65" data-category="beverages">
           <div class="product-img">🍵</div>
           <div class="product-info">
             <div class="product-tag new-tag">New</div>
-            <h3>Matcha Green Tea</h3>
-            <p>30g · ceremonial grade</p>
+            <h3>Tata Tea Gold</h3>
+            <p>250g · premium Assam tea</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$9.80</span>
+              <span class="price">₹65</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
-        <div class="product-card fresh reveal" style="--d:.4s" data-name="Sourdough Crackers" data-price="4.60" data-category="snacks">
-          <div class="product-img">🫓</div>
+        <div class="product-card fresh reveal" style="--d:.4s" data-name="Haldirams Mixture" data-price="60" data-category="snacks">
+          <div class="product-img">🥜</div>
           <div class="product-info">
             <div class="product-tag new-tag">New</div>
-            <h3>Sourdough Crackers</h3>
-            <p>5 oz · rosemary &amp; sea salt</p>
+            <h3>Haldirams Mixture</h3>
+            <p>200g · classic Indian mix</p>
+            <div class="stock-status in-stock">● In Stock</div>
             <div class="product-footer">
-              <span class="price">$4.60</span>
+              <span class="price">₹60</span>
               <div class="stars">★★★★☆</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
           </div>
         </div>
-        <div class="product-card fresh reveal" style="--d:.5s" data-name="Wild Mushroom Mix" data-price="7.20" data-category="produce">
-          <div class="product-img">🍄</div>
+        <div class="product-card fresh reveal" style="--d:.5s" data-name="Basmati Rice" data-price="120" data-category="pantry">
+          <div class="product-img">🍚</div>
           <div class="product-info">
             <div class="product-tag new-tag">New</div>
-            <h3>Wild Mushroom Mix</h3>
-            <p>8 oz · foraged blend</p>
+            <h3>Dehradun Basmati</h3>
+            <p>1kg · aged long grain rice</p>
+            <div class="stock-status low-stock">● Low Stock</div>
             <div class="product-footer">
-              <span class="price">$7.20</span>
+              <span class="price">₹120</span>
               <div class="stars">★★★★★</div>
               <button class="add-btn" data-add aria-label="Add to cart">+</button>
             </div>
@@ -602,31 +629,84 @@
         <span class="eyebrow light">Trusted by locals</span>
         <h2>What our <em>members</em> say</h2>
       </div>
+      <!-- Review Stats -->
+      <div class="review-stats reveal">
+        <div class="review-stat"><strong>4.8</strong><div class="review-stars">★★★★★</div><span>Overall Rating</span></div>
+        <div class="review-stat-div"></div>
+        <div class="review-stat"><strong>3,200+</strong><div class="review-stars" style="color:var(--sage)">●●●●●</div><span>Happy Customers</span></div>
+        <div class="review-stat-div"></div>
+        <div class="review-stat"><strong>98%</strong><div class="review-stars" style="color:var(--sage)">●●●●●</div><span>On-time Delivery</span></div>
+        <div class="review-stat-div"></div>
+        <div class="review-stat"><strong>4.9</strong><div class="review-stars">★★★★★</div><span>Freshness Score</span></div>
+      </div>
       <div class="testimonials-grid">
         <div class="testimonial reveal">
           <div class="stars">★★★★★</div>
-          <blockquote>"The freshness is unmatched. My weekly box feels like a curated market run without leaving home."</blockquote>
+          <blockquote>"Sabzi is always fresh and prices are very reasonable. I order every week and they never disappoint. Delivery is fast too!"</blockquote>
           <div class="testimonial-author">
-            <div class="avatar">A</div>
-            <div><strong>Avery K.</strong><span>Member since 2021</span></div>
+            <div class="avatar">P</div>
+            <div><strong>Priya Sharma</strong><span>Nagaon · Member since 2023</span></div>
           </div>
         </div>
         <div class="testimonial reveal" style="--d:.15s">
           <div class="stars">★★★★★</div>
-          <blockquote>"Packaging is beautiful, delivery is fast, and the produce lasts longer than any other service."</blockquote>
+          <blockquote>"Best grocery in Kampur! Dal and atta quality is top-notch. WhatsApp ordering is so convenient — no app needed."</blockquote>
           <div class="testimonial-author">
-            <div class="avatar">J</div>
-            <div><strong>Jordan S.</strong><span>Member since 2022</span></div>
+            <div class="avatar">R</div>
+            <div><strong>Rahul Das</strong><span>Kampur · Member since 2023</span></div>
           </div>
         </div>
         <div class="testimonial reveal" style="--d:.3s">
-          <div class="stars">★★★★★</div>
-          <blockquote>"Finally a grocery service that actually cares about where food comes from. Truly exceptional quality."</blockquote>
+          <div class="stars">★★★★☆</div>
+          <blockquote>"Fresh Amul products always available. They deliver on time and packaging is always clean. Will definitely recommend!"</blockquote>
           <div class="testimonial-author">
-            <div class="avatar">M</div>
-            <div><strong>Maya R.</strong><span>Member since 2020</span></div>
+            <div class="avatar">D</div>
+            <div><strong>Dipankar Kalita</strong><span>Nagaon · Member since 2024</span></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER TRACKING -->
+  <section id="tracking" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">Track your order</span>
+          <h2>Order <em>Tracking</em></h2>
+        </div>
+      </div>
+      <div class="tracking-card reveal">
+        <div class="tracking-input-row">
+          <input type="text" id="trackInput" class="track-input" placeholder="Enter Order ID (e.g. EM-2024-001)" />
+          <button id="trackBtn" class="btn-primary">Track →</button>
+        </div>
+        <div class="tracking-result" id="trackResult" style="display:none">
+          <div class="track-steps">
+            <div class="track-step done">
+              <div class="step-icon">✓</div>
+              <div class="step-info"><strong>Order Placed</strong><span>Received &amp; confirmed</span></div>
+            </div>
+            <div class="track-connector done"></div>
+            <div class="track-step done">
+              <div class="step-icon">✓</div>
+              <div class="step-info"><strong>Packed</strong><span>Items packed &amp; ready</span></div>
+            </div>
+            <div class="track-connector active"></div>
+            <div class="track-step active">
+              <div class="step-icon">🛵</div>
+              <div class="step-info"><strong>Out for Delivery</strong><span>On its way to you</span></div>
+            </div>
+            <div class="track-connector"></div>
+            <div class="track-step">
+              <div class="step-icon">🏠</div>
+              <div class="step-info"><strong>Delivered</strong><span>Expected by 6:00 PM</span></div>
+            </div>
+          </div>
+          <p class="track-note">🕐 Estimated delivery: Today by 6:00 PM</p>
+        </div>
+        <p class="track-hint">Try demo ID: <strong>EM-2024-001</strong></p>
       </div>
     </div>
   </section>
@@ -647,9 +727,9 @@
       <div class="cta-card reveal" style="--d:.2s">
         <div class="cta-badge">Evergreen<strong>+</strong></div>
         <h3>Delivery, designed around your schedule.</h3>
-        <p>Join Evergreen+ for free delivery on orders over $45 and early access to seasonal boxes.</p>
+        <p>Join Evergreen+ for free delivery on orders over ₹399 and early access to seasonal boxes.</p>
         <ul class="cta-perks">
-          <li>✓ Free delivery on $45+</li>
+          <li>✓ Free delivery on ₹399+</li>
           <li>✓ Early seasonal box access</li>
           <li>✓ Members-only deals</li>
           <li>✓ Cancel anytime</li>
@@ -703,11 +783,11 @@
           </div>
           <span>Evergreen<em>Market</em></span>
         </div>
-        <p>Premium groceries for modern routines.<br>Fresh, fast, and always curated.</p>
+        <p>Fresh Indian groceries for Nagaon &amp; Kampur families. Sourced from local Assam farms daily.</p>
         <div class="footer-social">
-          <a href="#" aria-label="Instagram" class="social-btn">📸</a>
-          <a href="#" aria-label="Twitter" class="social-btn">𝕏</a>
-          <a href="#" aria-label="Facebook" class="social-btn">📘</a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="social-btn">📘</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="social-btn">📸</a>
+          <a href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-btn">💬</a>
         </div>
       </div>
       <div class="footer-links">
@@ -726,11 +806,10 @@
           <a href="#">Contact Us</a>
         </div>
         <div>
-          <h4>Legal</h4>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Accessibility</a>
-          <a href="#">Cookies</a>
+          <h4>Visit Us</h4>
+          <p style="font-size:.85rem;opacity:.55;line-height:1.7">📍 Near BSNL Office, G.S. Road<br>Nagaon, Assam – 782001</p>
+          <p style="font-size:.85rem;opacity:.55;margin-top:8px">📞 +91 98765 43210</p>
+          <a href="https://maps.google.com/?q=Nagaon,Assam" target="_blank" rel="noopener" style="font-size:.82rem;color:var(--sage);margin-top:8px;display:inline-block">📍 View on Google Maps →</a>
         </div>
       </div>
     </div>
@@ -739,6 +818,11 @@
       <span>Made with 🌿 for fresh food lovers.</span>
     </div>
   </footer>
+
+  <!-- WHATSAPP FAB -->
+  <a href="https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20place%20an%20order" target="_blank" rel="noopener" class="wa-fab" aria-label="Order on WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
 
   <!-- TOAST -->
   <div class="toast" id="toast">
